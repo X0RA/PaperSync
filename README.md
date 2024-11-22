@@ -22,7 +22,7 @@ PaperSync serves as the backend server component for e-ink display systems. It p
 ## Installation / Usage
 
 ```bash
-git clone https://github.com/yourusername/PaperSync.git
+git clone https://github.com/X0RA/PaperSync.git
 cd PaperSync
 ```
 
