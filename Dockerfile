@@ -16,7 +16,6 @@ RUN mkdir -p /app/repo && chown -R 1000:1000 /app/repo
 
 # Copy the cache file and .env into the repo directory
 COPY cache /app/repo/cache
-COPY .env /app/repo/.env
 
 # Copy the startup script
 COPY docker-startup.sh /app/
