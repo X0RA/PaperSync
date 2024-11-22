@@ -1,11 +1,10 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import os
+from dotenv import load_dotenv
 
-# Spotify API credentials
-os.environ['SPOTIPY_CLIENT_ID'] = 'c6a9ec79cc81470d88656fd7d3c84f5d'
-os.environ['SPOTIPY_CLIENT_SECRET'] = '33af11922cfd4587b71540d04a21c874'
-os.environ['SPOTIPY_REDIRECT_URI'] = 'http://localhost:8888/callback'
+# Load environment variables from .env file
+load_dotenv()
 
 def generate_cache():
     """Generate Spotify authentication cache file."""

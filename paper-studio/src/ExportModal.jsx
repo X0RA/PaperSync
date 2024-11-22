@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 import { calculateAnchorPosition } from './utils';
+import { saveLayoutToServer } from './utils/api';
 
 function ExportModal({ elements, onClose }) {
 	const exportData = elements.map((el) => {
@@ -64,14 +65,12 @@ function ExportModal({ elements, onClose }) {
 				<Button
 					key="save"
 					type="primary"
-					onClick={() => {
-						fetch("http://localhost:4001/layout/save-layout", {
-							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify(exportData),
-						});
+					onClick={async () => {
+						try {
+							await saveLayoutToServer(exportData);
+						} catch (error) {
+							// Handle error (you might want to show a notification here)
+						}
 					}}
 				>
 					Save Layout to Server

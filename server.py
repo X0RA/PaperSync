@@ -8,6 +8,12 @@ from routes.layout import layout
 
 from routes.pages import pages
 from routes.images import images
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+port = int(os.getenv('SERVER_PORT', 4001))
+
 # Add react app build
 app = Flask(__name__, static_folder='./paper-studio/dist')
 
@@ -33,7 +39,7 @@ def serve_react(path):
 
 if __name__ == '__main__':
     try:
-        app.run(host='0.0.0.0', port=4001, debug=True)
+        app.run(host='0.0.0.0', port=port, debug=True)
     except Exception as e:
         logging.error(f"Error starting server: {str(e)}")
         sys.exit(1)

@@ -7,11 +7,10 @@ import ExportModal from "./ExportModal";
 import { Button, Layout, Typography } from "antd";
 
 import { calculateAnchorPosition, calculateDisplayPosition } from "./utils";
+import { fetchLayoutFromServer } from './utils/api';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
-
-const API_BASE_URL = 'http://localhost:4001';
 
 function App() {
 	const [elements, setElements] = useState([]);
@@ -29,13 +28,8 @@ function App() {
 
 	const fetchLayout = async () => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/layout/get-layout`);
-			if (!response.ok) {
-				throw new Error('Failed to fetch layout');
-			}
-			const data = await response.json();
-
-				await clearLayout();
+			const data = await fetchLayoutFromServer();
+			await clearLayout();
 
 			// Add IDs and convert positions to display coordinates
 			const elementsWithIds = data.layout.elements.map((element, index) => {

@@ -2,11 +2,25 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import os
+from dotenv import load_dotenv
 
-# Spotify API credentials
-os.environ['SPOTIPY_CLIENT_ID'] = 'c6a9ec79cc81470d88656fd7d3c84f5d'
-os.environ['SPOTIPY_CLIENT_SECRET'] = '33af11922cfd4587b71540d04a21c874'
-os.environ['SPOTIPY_REDIRECT_URI'] = 'http://localhost:8888/callback'
+# Load environment variables from .env file
+load_dotenv()
+
+# Check if environment variables exist before setting them
+spotify_client_id = os.getenv('SPOTIFY_CLIENT_ID')
+spotify_client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
+spotify_redirect_uri = os.getenv('SPOTIFY_REDIRECT_URI')
+
+if not all([spotify_client_id, spotify_client_secret, spotify_redirect_uri]):
+    raise ValueError(
+        "Missing Spotify API credentials. Please ensure SPOTIFY_CLIENT_ID, "
+        "SPOTIFY_CLIENT_SECRET, and SPOTIFY_REDIRECT_URI are set in your .env file"
+    )
+
+os.environ['SPOTIPY_CLIENT_ID'] = spotify_client_id
+os.environ['SPOTIPY_CLIENT_SECRET'] = spotify_client_secret
+os.environ['SPOTIPY_REDIRECT_URI'] = spotify_redirect_uri
 
 def get_spotify_client():
     cache_path = "./cache"

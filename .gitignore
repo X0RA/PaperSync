@@ -29,6 +29,5 @@ cache/
 Thumbs.db
 
 # Environment variables
-.env
-.env.local
 cache
+paper-studio/.env

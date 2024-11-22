@@ -64,10 +64,18 @@ echo -e "${GREEN} Installing Python dependencies...${NC}"
 python -m pip install --upgrade pip || handle_error $LINENO
 python -m pip install -r requirements.txt || handle_error $LINENO
 
-# Start Flask server
-echo -e "${GREEN} Starting Flask server...${NC}"
-export FLASK_DEBUG=1 # Enable debug mode
-python -m flask run --host=0.0.0.0
+# Read environment variables from .env file
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+fi
+
+# Set default port if SERVER_PORT is not set
+SERVER_PORT=${SERVER_PORT:-4001}
+echo -e "${GREEN} Using port: ${SERVER_PORT}${NC}"
+
+# Start Gunicorn server
+echo -e "${GREEN} Starting Gunicorn server on port ${SERVER_PORT}...${NC}"
+gunicorn --bind "0.0.0.0:${SERVER_PORT}" --workers 4 --reload "app:app" || handle_error $LINENO
 
 # Cleanup function
 cleanup() {

@@ -6,7 +6,7 @@ services:
     volumes:
       - papersync_data:/app/repo
     ports:
-      - "4001:4001"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     user: root
     command: sh -c "chmod +x /app/docker-startup.sh && /app/docker-startup.sh"
 

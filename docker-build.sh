@@ -73,10 +73,19 @@ if [ ! -f "${SCRIPT_DIR}/server.py" ]; then
     handle_error $LINENO
 fi
 
+# Load port from .env file or use default
+if [ -f "${SCRIPT_DIR}/.env" ]; then
+    PORT=$(grep SERVER_PORT "${SCRIPT_DIR}/.env" | cut -d '=' -f2 || echo "4001")
+    echo -e "${GREEN}Using port from .env file: ${PORT}${NC}"
+else
+    PORT="4001"
+    echo -e "${GREEN}No port specified in .env file, using default port: ${PORT}${NC}"
+fi
+
 cd "${SCRIPT_DIR}" || handle_error $LINENO
-# Start Gunicorn in the background with 4 workers, binding to all interfaces on port 5000
-gunicorn --workers 4 --bind 0.0.0.0:4001 server:app --reload --daemon
-echo -e "${GREEN}Gunicorn server started in background${NC}"
+# Start Gunicorn in the background with 4 workers, binding to all interfaces on port from .env
+gunicorn --workers 4 --bind "0.0.0.0:${PORT}" server:app --reload --daemon
+echo -e "${GREEN}Gunicorn server started in background on port ${PORT}${NC}"
 
 # Add final success message and exit code
 echo -e "${GREEN}Build and deployment completed successfully${NC}"
