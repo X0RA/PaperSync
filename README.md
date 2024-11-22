@@ -6,6 +6,8 @@ A Python server application that manages and transmits JSON-encoded display elem
 
 PaperSync serves as the backend server component for e-ink display systems. It processes and sends formatted data that can be rendered on e-ink displays running the PaperView client software.
 
+This also includes a React frontend for editing the display elements within a canvas with live update to the e-ink display.
+
 ## Features
 - JSON-based communication protocol
 - Simple server-client architecture
@@ -13,6 +15,8 @@ PaperSync serves as the backend server component for e-ink display systems. It p
 - Image (and icon), text, and button elements
 - Encodes images to eink display format
 - Has spotify api integration for album art and currently playing song
+- Docker image available
+- React frontend for editing the display elements
 
 ## Prerequisites
 
