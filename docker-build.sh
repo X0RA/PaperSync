@@ -75,7 +75,7 @@ fi
 
 cd "${SCRIPT_DIR}" || handle_error $LINENO
 # Start Gunicorn in the background with 4 workers, binding to all interfaces on port 5000
-gunicorn --workers 4 --bind 0.0.0.0:5000 server:app --reload --daemon
+gunicorn --workers 4 --bind 0.0.0.0:4001 server:app --reload --daemon
 echo -e "${GREEN}Gunicorn server started in background${NC}"
 
 # Add final success message and exit code
