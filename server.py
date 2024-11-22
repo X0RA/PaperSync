@@ -33,7 +33,7 @@ def serve_react(path):
 
 if __name__ == '__main__':
     try:
-        app.run(host='0.0.0.0', port=5000, debug=True)
+        app.run(host='0.0.0.0', port=4001, debug=True)
     except Exception as e:
         logging.error(f"Error starting server: {str(e)}")
         sys.exit(1)
