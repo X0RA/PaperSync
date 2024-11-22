@@ -2,9 +2,6 @@
 
 # Repository configuration with optional GitHub token support
 REPO_URL="https://github.com/X0RA/PaperSync.git"
-if [ ! -z "$GITHUB_TOKEN" ]; then
-    REPO_URL="https://${GITHUB_TOKEN}@github.com/X0RA/PaperSync.git"
-fi
 BRANCH="main"
 SCRIPT_PATH="docker-build.sh"
 

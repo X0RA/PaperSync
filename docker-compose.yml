@@ -7,8 +7,6 @@ services:
       - papersync_data:/app/repo
     ports:
       - "5000:5000"
-    env_file:
-      - .env
     user: root
     command: sh -c "chmod +x /app/docker-startup.sh && /app/docker-startup.sh"
 
