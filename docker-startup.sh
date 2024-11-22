@@ -12,11 +12,13 @@ git config --global --add safe.directory /app/repo
 
 # Initial repository setup and cloning
 if [ ! -d "/app/repo/.git" ]; then
-    echo "Repository doesn't exist or is invalid. Cleaning up and cloning..."
-    rm -rf /app/repo
-    git clone "$REPO_URL" /app/repo
+    echo "Repository doesn't exist or is invalid. Setting up git..."
+    mkdir -p /app/repo
     cd /app/repo
-    git checkout main
+    git init
+    git remote add origin "$REPO_URL"
+    git fetch origin
+    git checkout -B main origin/main
 else
     echo "Repository exists. Pulling latest changes..."
     cd /app/repo || exit 1
@@ -24,7 +26,10 @@ else
     git remote remove origin 2>/dev/null || true
     git remote add origin "$REPO_URL"
     git fetch origin >/dev/null 2>&1
-    git reset --hard origin/main
+    git merge origin/main || {
+        echo "Merge failed. Preserving local files and updating tracked files..."
+        git checkout origin/main -- .
+    }
 fi
 
 
@@ -55,7 +60,12 @@ update_and_restart() {
     
     # Pull latest changes from GitHub
     git fetch origin main >/dev/null 2>&1
-    git reset --hard origin/main > /dev/null 2>&1
+    
+    # Use merge instead of reset to preserve local changes
+    git merge origin/main || {
+        echo "Merge failed. Preserving local files and updating tracked files..."
+        git checkout origin/main -- .
+    }
     
     # Get new commit ID
     NEW_COMMIT=$(git rev-parse HEAD || echo "none")
