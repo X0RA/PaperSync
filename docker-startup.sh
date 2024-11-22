@@ -62,9 +62,9 @@ update_and_restart() {
     git fetch origin main >/dev/null 2>&1
     
     # Use merge instead of reset to preserve local changes
-    git merge origin/main || {
-        echo "Merge failed. Preserving local files and updating tracked files..."
-        git checkout origin/main -- .
+    git merge origin/main >/dev/null 2>&1 || {
+        echo "Merge failed. Preserving local files and updating tracked files..." >/dev/null
+        git checkout origin/main -- . >/dev/null 2>&1
     }
     
     # Get new commit ID
