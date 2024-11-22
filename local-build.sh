@@ -34,7 +34,7 @@ trap 'handle_error $LINENO' ERR
 
 # Build React app
 echo -e "${GREEN} Building React application...${NC}"
-cd react-screen-creator || handle_error $LINENO
+cd paper-studio || handle_error $LINENO
 npm install --quiet || handle_error $LINENO
 npm run build || handle_error $LINENO
 cd ..
