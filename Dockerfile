@@ -18,8 +18,8 @@ RUN mkdir -p /app/repo && chown -R 1000:1000 /app/repo
 COPY cache /app/repo/cache
 
 # Copy the startup script
-COPY startup.sh /app/
-RUN chmod +x /app/startup.sh
+COPY docker-startup.sh /app/
+RUN chmod +x /app/docker-startup.sh
 
 # Set the startup script as the entry point
-ENTRYPOINT ["/app/startup.sh"]
+ENTRYPOINT ["/app/docker-startup.sh"]

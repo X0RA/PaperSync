@@ -4,4 +4,5 @@ spotipy
 python-dotenv
 requests
 numpy
+gunicorn
 # selenium

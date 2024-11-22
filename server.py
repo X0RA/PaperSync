@@ -9,7 +9,7 @@ from routes.layout import layout
 from routes.pages import pages
 from routes.images import images
 # Add react app build
-app = Flask(__name__, static_folder='./react-screen-creator/dist')
+app = Flask(__name__, static_folder='./paper-studio/dist')
 
 # other routes
 app.register_blueprint(spotify, url_prefix='/spotify')
@@ -18,10 +18,10 @@ app.register_blueprint(layout, url_prefix='/layout')
 app.register_blueprint(pages, url_prefix='/pages')
 app.register_blueprint(images, url_prefix='/image')
 
-# Serve the static assets from /create/assets
-# @app.route('/create/assets/<path:path>')
-# def serve_assets(path):
-#     return send_from_directory(os.path.join(app.static_folder, 'assets'), path)
+# Add a new route specifically for assets
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    return send_from_directory(os.path.join(app.static_folder, 'assets'), filename)
 
 # Serve the main app
 @app.route('/create', defaults={'path': ''})

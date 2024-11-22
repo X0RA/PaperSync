@@ -120,7 +120,7 @@ function App() {
 				}}
 			>
 				<Title level={3} style={{ color: "white", margin: 0 }}>
-					E-Ink Display Layout Editor
+					Paper Studio
 				</Title>
 			</Header>
 			<Content
