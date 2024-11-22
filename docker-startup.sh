@@ -90,8 +90,6 @@ update_and_restart() {
             ls -la python_server/ || echo "python_server directory not found"
             exit 1
         fi
-    else
-        echo "No updates found, continuing with current version..."
     fi
 }
 
