@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: papersync
+    volumes:
+      - papersync_data:/app/repo
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    user: root
+    command: sh -c "chmod +x /app/startup.sh && /app/startup.sh"
+
+volumes:
+  papersync_data:

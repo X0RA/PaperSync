@@ -1,0 +1,33 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+python_env/
+venv/
+env/
+
+# Node modules and build files
+paper-studio/node_modules/
+paper-studio/dist/
+
+# Layout files (if they are generated)
+layouts/layout_*.json
+
+# Cache directory
+cache/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
