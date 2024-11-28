@@ -24,6 +24,11 @@ app.register_blueprint(layout, url_prefix='/layout')
 app.register_blueprint(pages, url_prefix='/pages')
 app.register_blueprint(images, url_prefix='/image')
 
+# Add a new route for the root path
+@app.route('/')
+def home():
+    return "Up and running :smile:"
+
 # Add a new route specifically for assets
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):

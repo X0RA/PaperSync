@@ -31,3 +31,4 @@ Thumbs.db
 # Environment variables
 cache
 paper-studio/.env
+output.png
